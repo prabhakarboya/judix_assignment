@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/* ---------- Theme Colors ---------- */
+:root {
+  --primary: #6366f1;
+  --secondary: #22c55e;
+  --accent: #f59e0b;
+}
+
+/* ---------- Base Styles ---------- */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  color: #1f2937;
+}
+
+/* ---------- Links ---------- */
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* ---------- Glass Card ---------- */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
