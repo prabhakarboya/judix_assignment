@@ -1,0 +1,295 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Text To Word</title></head><body><h1>🌐 Judix Task App &ndash; Postman / API Documentation</h1>
+<p>This document provides all the <strong>API endpoints</strong> for the Judix Task App, including request methods, headers, body, and example responses. You can use this in <strong>Postman</strong> or any API testing tool.</p>
+<hr>
+<h2><strong>1. User Signup</strong></h2>
+<p><strong>Endpoint:</strong> <code>POST /users/signup</code><br><strong>Description:</strong> Register a new user</p>
+<p><strong>Request Headers:</strong></p>
+<pre><code>Content-Type: application/json
+</code></pre>
+<p><strong>Request Body (JSON):</strong></p>
+<pre><code class="language-json">{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123"
+}
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 201 Created</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "success": true,
+  "token": "&lt;JWT_TOKEN&gt;",
+  "user": {
+    "_id": "user_id",
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
+}
+</code></pre>
+<p><strong>Error Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 400 Bad Request</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "success": false,
+  "message": "User already exists"
+}
+</code></pre>
+<hr>
+<h2><strong>2. User Login</strong></h2>
+<p><strong>Endpoint:</strong> <code>POST /users/login</code><br><strong>Description:</strong> Login user and issue JWT</p>
+<p><strong>Request Headers:</strong></p>
+<pre><code>Content-Type: application/json
+</code></pre>
+<p><strong>Request Body (JSON):</strong></p>
+<pre><code class="language-json">{
+  "email": "john@example.com",
+  "password": "password123"
+}
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 200 OK</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "success": true,
+  "token": "&lt;JWT_TOKEN&gt;",
+  "user": {
+    "_id": "user_id",
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
+}
+</code></pre>
+<p><strong>Error Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 401 Unauthorized</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "success": false,
+  "message": "Invalid email or password"
+}
+</code></pre>
+<hr>
+<h2><strong>3. Get User Profile</strong></h2>
+<p><strong>Endpoint:</strong> <code>GET /users/profile</code><br><strong>Description:</strong> Fetch logged-in user profile</p>
+<p><strong>Request Headers:</strong></p>
+<pre><code>Content-Type: application/json
+Authorization: Bearer &lt;JWT_TOKEN&gt;
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 200 OK</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "_id": "user_id",
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+</code></pre>
+<p><strong>Error Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 401 Unauthorized</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "message": "Not authorized, token failed"
+}
+</code></pre>
+<hr>
+<h2><strong>4. Update User Profile</strong></h2>
+<p><strong>Endpoint:</strong> <code>PUT /users/profile</code><br><strong>Description:</strong> Update profile information</p>
+<p><strong>Request Headers:</strong></p>
+<pre><code>Content-Type: application/json
+Authorization: Bearer &lt;JWT_TOKEN&gt;
+</code></pre>
+<p><strong>Request Body (JSON):</strong></p>
+<pre><code class="language-json">{
+  "name": "John Doe Updated",
+  "email": "johnupdated@example.com",
+  "password": "newpassword123"
+}
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 200 OK</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "_id": "user_id",
+  "name": "John Doe Updated",
+  "email": "johnupdated@example.com",
+  "token": "&lt;NEW_JWT_TOKEN&gt;"
+}
+</code></pre>
+<p><strong>Error Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 400 Bad Request</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "message": "User not found"
+}
+</code></pre>
+<hr>
+<h2><strong>5. Get All Tasks</strong></h2>
+<p><strong>Endpoint:</strong> <code>GET /tasks</code><br><strong>Description:</strong> Fetch all tasks for the logged-in user</p>
+<p><strong>Request Headers:</strong></p>
+<pre><code>Content-Type: application/json
+Authorization: Bearer &lt;JWT_TOKEN&gt;
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 200 OK</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">[
+  {
+    "_id": "task_id_1",
+    "title": "Task 1",
+    "description": "Description 1",
+    "user": "user_id"
+  },
+  {
+    "_id": "task_id_2",
+    "title": "Task 2",
+    "description": "Description 2",
+    "user": "user_id"
+  }
+]
+</code></pre>
+<hr>
+<h2><strong>6. Create Task</strong></h2>
+<p><strong>Endpoint:</strong> <code>POST /tasks</code><br><strong>Description:</strong> Add a new task</p>
+<p><strong>Request Headers:</strong></p>
+<pre><code>Content-Type: application/json
+Authorization: Bearer &lt;JWT_TOKEN&gt;
+</code></pre>
+<p><strong>Request Body (JSON):</strong></p>
+<pre><code class="language-json">{
+  "title": "New Task",
+  "description": "This is a new task"
+}
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 201 Created</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "_id": "task_id",
+  "title": "New Task",
+  "description": "This is a new task",
+  "user": "user_id"
+}
+</code></pre>
+<hr>
+<h2><strong>7. Update Task</strong></h2>
+<p><strong>Endpoint:</strong> <code>PUT /tasks/:id</code><br><strong>Description:</strong> Update a specific task</p>
+<p><strong>Request Headers:</strong></p>
+<pre><code>Content-Type: application/json
+Authorization: Bearer &lt;JWT_TOKEN&gt;
+</code></pre>
+<p><strong>Request Body (JSON):</strong></p>
+<pre><code class="language-json">{
+  "title": "Updated Task Title",
+  "description": "Updated description"
+}
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 200 OK</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "_id": "task_id",
+  "title": "Updated Task Title",
+  "description": "Updated description",
+  "user": "user_id"
+}
+</code></pre>
+<hr>
+<h2><strong>8. Delete Task</strong></h2>
+<p><strong>Endpoint:</strong> <code>DELETE /tasks/:id</code><br><strong>Description:</strong> Delete a specific task</p>
+<p><strong>Request Headers:</strong></p>
+<pre><code>Content-Type: application/json
+Authorization: Bearer &lt;JWT_TOKEN&gt;
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 200 OK</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "message": "Task removed"
+}
+</code></pre>
+<p><strong>Error Response:</strong></p>
+<ul>
+<li>
+<p><strong>Status:</strong> 404 Not Found</p>
+</li>
+<li>
+<p><strong>Body:</strong></p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  "message": "Task not found"
+}
+</code></pre>
+<hr>
+<p>&nbsp;</p></body></html>
